@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Routine = require('../models/routine')
 
+//retrieves all of the workout routines from the db
 router.get('/all', async (req, res) => {
     try{
         let routines = await Routine.find()
@@ -12,7 +13,9 @@ router.get('/all', async (req, res) => {
     }
 })
 
+//add workout routine to db
 router.post('/add', async (req, res) => {
+    //creating object to be stored
     const routine = new Routine({
         name: req.body.name,
         workouts: req.body.workouts
@@ -26,6 +29,7 @@ router.post('/add', async (req, res) => {
     }
 })
 
+//delete specific workout routine from db
 router.delete('/delete/:id', async (req, res )=>{
     try{
         const routine = await Routine.findById(req.params.id)
@@ -37,6 +41,7 @@ router.delete('/delete/:id', async (req, res )=>{
     }
 })
 
+//update specific workout routine
 router.patch('/edit/:id', async (req, res) => {
     try{
         let routine = await Routine.findById(req.params.id)
