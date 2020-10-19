@@ -10,13 +10,17 @@ const db = mongoose.connection
 db.on('error', (error) => console.error(error))
 db.once('open', () => console.log('Connected to database'))
 
-//initializing router
-const router = require('./routes/main')
+//initializing routers
+const routineRouter = require('./routes/routines')
+const foodRouter = require('./routes/foods')
+const weightRouter = require('./routes/weight')
 
 app.use(express.json())
 
 //defining router path
-app.use('/routines', router)
+app.use('/routines', routineRouter)
+app.use('/food', foodRouter)
+app.use('/weight', weightRouter)
 
 app.listen(5000, () => console.log('Server started'))
 
